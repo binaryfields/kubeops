@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: ${CLUSTER_NAME}
+  cluster:
+    certificate-authority-data: ${CLUSTER_CA}
+    server: ${CLUSTER_ENDPOINT}
+users:
+- name: ${USER}
+  user:
+    client-certificate-data: ${CLIENT_CERTIFICATE_DATA}
+contexts:
+- name: ${USER}-${CLUSTER_NAME}-${NAMESPACE}
+  context:
+    cluster: ${CLUSTER_NAME}
+    namespace: ${NAMESPACE}
+    user: ${USER}
+current-context: ${USER}-${CLUSTER_NAME}-${NAMESPACE}
